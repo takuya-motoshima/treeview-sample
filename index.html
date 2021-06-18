@@ -1,0 +1,61 @@
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tree view sample</title>
+  <link rel="stylesheet" type="text/css" href="node_modules/jstree/dist/themes/default/style.min.css">
+  <link rel="stylesheet" type="text/css" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="index.css">
+</head>
+<body>
+  <div class="container-sm my-md-4">
+    <h1 class="mb-md-4">Tree view sample</h1>
+    <div class="row align-items-start">
+      <div class="col-sm-6">
+        <h2>Tree</h2>
+        <div id="tree">
+          <ul>
+            <li>Root
+              <ul>
+                <li>Child 1
+                  <ul>
+                    <li>Grandchild 1</li>
+                    <li>Grandchild 2</li>
+                    <li>Grandchild 3</li>
+                    <li>Grandchild 4</li>
+                  </ul>
+                </li>
+                <li>Child 2
+                  <ul>
+                    <li>Grandchild 5</li>
+                    <li>Grandchild 6</li>
+                    <li>Grandchild 7</li>
+                    <li>Grandchild 8</li>
+                  </ul>
+                </li>
+                <li>Child 3
+                  <ul>
+                    <li>Grandchild 9</li>
+                    <li>Grandchild 10</li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <h2>Events</h2>
+        <div id="output"></div>
+      </div>
+    </div>
+  </div>
+  <script src="node_modules/jquery/dist/jquery.min.js"></script>
+  <script src="node_modules/jstree/dist/jstree.min.js"></script>
+  <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="index.js" type="module"></script>
+</body>
+</html>
