@@ -7,12 +7,8 @@
     "LICENSE",
     "README.md",
     "screencaps/",
-    "img/",
-    "helper.js",
-    "index.css",
+    "src/",
     "index.html",
-    "index.js",
-    "types.js",
     "package.json",
     "package-lock.json"
   ],
@@ -21,9 +17,13 @@
     "url": "git+https://github.com/takuya-motoshima/treeview-sample.git"
   },
   "keywords": [
+    "es6",
+    "jquery",
+    "jstree",
     "tree",
     "treeviewwidget",
-    "treewidget"
+    "treewidget",
+    "treeview"
   ],
   "author": "Takuya Motoshima <developer.takuyamotoshima@gmail.com> (https://twitter.com/TakuyaMotoshima)",
   "license": "MIT",

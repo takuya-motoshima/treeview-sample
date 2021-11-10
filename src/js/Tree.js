@@ -13,7 +13,7 @@ export default class {
         // data configuration.
         data: {
           url : node => {
-            const url = `json/${encodeURIComponent(node.id)}.json`;
+            const url = `src/json/${encodeURIComponent(node.id)}.json`;
             console.log(`Request ${url}`);
             return url;
           },
