@@ -1,0 +1,16 @@
+<svg aria-hidden="true" focusable="false" data-prefix="fad" data-icon="plus" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+  <style>
+  .secondary {
+    fill: rgb(173, 181, 189);
+    opacity: 0.4;
+  }
+  .primary {
+    fill: rgb(173, 181, 189);
+    opacity: 1;
+  }
+  </style>
+  <g>
+    <path fill="currentColor" d="M176 448a32 32 0 0 0 32 32h32a32 32 0 0 0 32-32V304h-96zm64-416h-32a32 32 0 0 0-32 32v144h96V64a32 32 0 0 0-32-32z" class="secondary"></path>
+    <path fill="currentColor" d="M448 240v32a32 32 0 0 1-32 32H32a32 32 0 0 1-32-32v-32a32 32 0 0 1 32-32h384a32 32 0 0 1 32 32z" class="primary"></path>
+  </g>
+</svg>

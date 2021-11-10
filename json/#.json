@@ -1,0 +1,9 @@
+[
+  {
+    "id": "root",
+    "parent": "#",
+    "text": "Creatures",
+    "state": "closed",
+    "children": true
+  }
+]

@@ -33,8 +33,7 @@
   },
   "homepage": "https://github.com/takuya-motoshima/treeview-sample#readme",
   "dependencies": {
-    "bootstrap": "^5.0.0-beta3",
     "jquery": "^3.6.0",
-    "jstree": "^3.3.11"
+    "jstree": "^3.3.12"
   }
 }

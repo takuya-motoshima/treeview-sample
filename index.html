@@ -1,61 +1,86 @@
-</body>
-</html>
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tree view sample</title>
-  <link rel="stylesheet" type="text/css" href="node_modules/jstree/dist/themes/default/style.min.css">
-  <link rel="stylesheet" type="text/css" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
-  <link rel="stylesheet" type="text/css" href="index.css">
+  <link rel="stylesheet" href="node_modules/jstree/dist/themes/default/style.min.css">
+  <link rel="stylesheet" href="css/tree.css">
+  <title>JSTree test</title>
 </head>
 <body>
-  <div class="container-sm my-md-4">
-    <h1 class="mb-md-4">Tree view sample</h1>
-    <div class="row align-items-start">
-      <div class="col-sm-6">
-        <h2>Tree</h2>
-        <div id="tree">
-          <ul>
-            <li>Root
-              <ul>
-                <li>Child 1
-                  <ul>
-                    <li>Grandchild 1</li>
-                    <li>Grandchild 2</li>
-                    <li>Grandchild 3</li>
-                    <li>Grandchild 4</li>
-                  </ul>
-                </li>
-                <li>Child 2
-                  <ul>
-                    <li>Grandchild 5</li>
-                    <li>Grandchild 6</li>
-                    <li>Grandchild 7</li>
-                    <li>Grandchild 8</li>
-                  </ul>
-                </li>
-                <li>Child 3
-                  <ul>
-                    <li>Grandchild 9</li>
-                    <li>Grandchild 10</li>
-                  </ul>
-                </li>
-              </ul>
-            </li>
-          </ul>
-        </div>
-      </div>
-      <div class="col-sm-6">
-        <h2>Events</h2>
-        <div id="output"></div>
-      </div>
-    </div>
-  </div>
+  <p>
+    <button data-on-update-tree-with-json type="button">Update tree with JSON</button>
+    <button data-on-update-tree-with-ajax type="button">Update tree with Ajax</button>
+    <button data-on-refresh-tree type="button">Refresh tree</button>
+  </p>
+
+  <div id="tree"></div>
   <script src="node_modules/jquery/dist/jquery.min.js"></script>
-  <script src="node_modules/jstree/dist/jstree.min.js"></script>
-  <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-  <script src="index.js" type="module"></script>
+  <script src="node_modules/jstree/dist/jstree.js"></script>
+  <!-- <script src="node_modules/jstree/dist/jstree.min.js"></script> -->
+  <script type="module">
+  import Tree from './js/Tree.js';
+
+  // Tree instance.
+  const tree = new Tree(document.querySelector('#tree'), {
+    maxDepth: 3,
+    lang: {
+      contextMenu: {
+        create: '新規フォルダ作成',
+        rename: '名称の変更',
+        remove: '削除'
+      },
+      prompt: {
+        create: '新しいフォルダ名を入力してください',
+        rename: 'フォルダ名を入力してください'
+      },
+      valdn: {
+        folderExists: '指定されたフォルダ名は既に存在します',
+        folderNameRequired: 'フォルダ名を入力してください'
+      }
+    }
+  });
+
+  (async() => {
+    // // Request data.
+    // const data = await (await fetch('./json/data1.json')).json();
+
+    // // Draw tree.
+    // tree.updateTree([
+    //   {
+    //     "id": "root",
+    //     "parent": "#",
+    //     "text": "Root node",
+    //     "state": "closed",
+    //     "children": true
+    //   }
+    // ]);
+    // tree.updateTree(data);
+  })();
+
+  // Set events.
+  $('body')
+    .on('click', '[data-on-update-tree-with-json]', () => {
+      tree.updateTree([
+        {id: 'root', parent: '#', text: 'Menu'},
+        {id: 'child1', parent: 'root', text: 'Main dish'},
+        {id: 'child2', parent: 'root', text: 'Drink'},
+        {id: 'grandchild1', parent: 'child1', text: 'Beef steak'},
+        {id: 'grandchild2', parent: 'child1', text: 'Sea bream meuniere'},
+        {id: 'grandchild3', parent: 'child1', text: 'Teriyaki bird'},
+        {id: 'grandchild4', parent: 'child2', text: 'Orange juice'},
+        {id: 'grandchild5', parent: 'child2', text: 'Cola'},
+        {id: 'grandchild6', parent: 'child2', text: 'Beer'},
+        {id: 'grandchild7', parent: 'child2', text: 'Wine'}
+      ]);
+    })
+    .on('click', '[data-on-update-tree-with-ajax]', () => {
+      tree.updateTree('json/data1.json');
+    })
+    .on('click', '[data-on-refresh-tree]', () => {
+      tree.refreshTree();
+    });
+  </script>
 </body>
 </html>
