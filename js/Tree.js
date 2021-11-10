@@ -104,9 +104,9 @@ export default class {
   /**
    * Merges default and custom options and returns.
    */
-    mergeConfig(sources, target = undefined) {
-    if (target === undefined)
-      target = {
+   mergeConfig(opts, defOpts = undefined) {
+    if (defOpts === undefined)
+      defOpts = {
         maxDepth: 3,
         lang: {
           contextMenu: {
@@ -124,16 +124,14 @@ export default class {
           }
         }
       };
-    for (let source of [sources]) {
-      for (let key of Object.keys(source)) {
-        const srcVal = source[key];
-        const tgtVal = target[key];
-        target[key] = tgtVal && srcVal && typeof tgtVal === 'object' && typeof srcVal === 'object'
-                    ? this.mergeConfig(srcVal, tgtVal)
-                    : srcVal
-      }
+    for (let [key, defOpt] of Object.entries(defOpts)) {
+      console.log(`key=${key}, typeof opts[key]=${typeof opts[key]}, typeof defOpt=${typeof defOpt}`);
+      if (!opts[key])
+        opts[key] = defOpt;
+      else if (typeof opts[key] === 'object' && typeof defOpt === 'object')
+        opts[key] = this.mergeConfig(opts[key], defOpt);
     }
-    return target;
+    return opts;
   }
 
   /**
