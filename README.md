@@ -26,11 +26,15 @@ You can try the tree view by accessing the installed directory from your browser
 
 All notable changes to this project will be documented in this file.
 
-### [1.0.3] - 2021-11-12
+### [1.0.4] - 2021-11-12
 #### Fixed
 - Fixed a bug that the close icon disappears when the folder is closed.
 
-### [1.0.2] - 2021-11-11
+### [1.0.3] - 2021-11-10
+#### Fixed
+- Fix package .json.
+
+### [1.0.2] - 2021-11-10
 #### Fixed
 - Fix mergeConfig bug.
 
