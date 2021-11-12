@@ -30,7 +30,7 @@ export default class {
         // a boolean indicating if multiple nodes can be selected
         multiple: false,
         themes: {
-          variant: 'large',
+          // variant: 'large',
           dots: false,
           stripes: false
         }
@@ -317,5 +317,19 @@ export default class {
    */
   deleteNode(obj) {
     return this.tree.delete_node(obj);
+  }
+
+  /**
+   * Change to default theme
+   */
+  changeDefaultTheme() {
+    tree.set_theme_variant(false);
+  }
+
+  /**
+   * Change to large theme
+   */
+  changeLargeTheme() {
+    tree.set_theme_variant('large');
   }
 }

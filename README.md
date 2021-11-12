@@ -21,10 +21,13 @@ npm install;
 
 You can try the tree view by accessing the installed directory from your browser.
 
-
 ## Changelog
 
 All notable changes to this project will be documented in this file.
+
+### [1.0.5] - 2021-11-12
+#### Fixed
+- Added an example to change the theme.
 
 ### [1.0.4] - 2021-11-12
 #### Fixed

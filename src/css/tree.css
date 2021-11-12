@@ -24,12 +24,12 @@
   /* Open / close folder icon */
   .jstree-node.jstree-open>.jstree-ocl,
   .jstree-node.jstree-closed>.jstree-ocl {
-    width: 32px !important;
-    height: 32px !important;
+    /* width: 32px !important; */
+    /* height: 32px !important; */
     background-repeat: no-repeat !important;
     background-position: center !important;
     background-size: 14px !important;
-    line-height: 32px;
+    /* line-height: 32px; */
   }
 
   .jstree-node.jstree-closed>.jstree-ocl {
@@ -43,8 +43,12 @@
   /* Folder image */
   .jstree-node > .jstree-anchor .jstree-icon {
     background-repeat: no-repeat !important;
-    background-size: 24px !important;
+    background-size: 20px !important;
     background-position: center !important;
+  }
+
+  .jstree-default-large .jstree-node > .jstree-anchor .jstree-icon {
+    background-size: 24px !important;
   }
 
   .jstree-node > .jstree-anchor.jstree-clicked {
