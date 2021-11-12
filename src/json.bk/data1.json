@@ -1,0 +1,42 @@
+[
+  {
+    "id": "root",
+    "parent": "#",
+    "text": "Organism"
+  },
+  {
+    "id": "child1",
+    "parent": "root",
+    "text": "Animal"
+  },
+  {
+    "id": "child2",
+    "parent": "root",
+    "text": "Plant"
+  },
+  {
+    "id": "grandchild1",
+    "parent": "child1",
+    "text": "Dog"
+  },
+  {
+    "id": "grandchild2",
+    "parent": "child1",
+    "text": "Lion"
+  },
+  {
+    "id": "grandchild3",
+    "parent": "child1",
+    "text": "Cat"
+  },
+  {
+    "id": "grandchild4",
+    "parent": "child2",
+    "text": "Cherry blossoms"
+  },
+  {
+    "id": "grandchild5",
+    "parent": "child2",
+    "text": "Sunflower"
+  }
+]

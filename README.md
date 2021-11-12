@@ -21,6 +21,27 @@ npm install;
 
 You can try the tree view by accessing the installed directory from your browser.
 
+
+## Changelog
+
+All notable changes to this project will be documented in this file.
+
+### [1.0.3] - 2021-11-12
+#### Fixed
+- Fixed a bug that the close icon disappears when the folder is closed.
+
+### [1.0.2] - 2021-11-11
+#### Fixed
+- Fix mergeConfig bug.
+
+### [1.0.1] - 2021-11-10
+#### Fixed
+- Classify tree JS.
+
+### [1.0.0] - 2021-6-18
+#### Fixed
+- Released.
+
 ## Reference
 - [jsTree API](https://www.jstree.com/api/)
 - [jstree type definitions](https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/jstree/index.d.ts)

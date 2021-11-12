@@ -39,7 +39,8 @@ export default class {
         'types',// This plugin makes it possible to add predefined types for groups of nodes, which means to easily control nesting rules and icon for each group.
         'state',// This plugin saves all opened and selected nodes in the user's browser, so when returning to the same tree the previous state will be restored.
         'sort',// The sort enables jstree to automatically sort all nodes using a specified function. This means that when the user creates, renames or moves nodes around - they will automatically sort.
-        'contextmenu'// This plugin makes it possible to right click nodes and shows a list of configurable actions in a menu.
+        'contextmenu',// This plugin makes it possible to right click nodes and shows a list of configurable actions in a menu.
+        // 'unique'// Enforces that no nodes with the same name can coexist as siblings.
       ],
       types: {
         selFldr: {},
@@ -93,11 +94,23 @@ export default class {
       }
     })
     // triggered when a node is closed and the animation is complete
-    .on('after_close.jstree', (evnt, data) => {
+    .on('after_close.jstree', (evnt, {node, instance}) => {
       // Delete the cache so that when the folder is opened, the child folder information is queried to the server again.
-      this.tree.delete_node(data.node.children);
-      this.tree._model.data[data.node.id].state.loaded = false;
+      this.tree.delete_node(node.children);
+      this.tree._model.data[node.id].state.loaded = false;
+
+      // When the folder is closed, the ".jstree-closed" class is not set in the li element, so the close icon disappears, so set the ".jstree-closed" class in the li element.
+      setTimeout(() => {
+        const dom = this.getNode(node.id, true)[0];
+        dom.classList.add('jstree-closed');
+      }, 0);
     })
+    // .on("close_node.jstree", (evnt, data) => {
+    //   console.log("close_node");
+    // })
+    // .on('load_node.jstree', (evnt, {node}) => {
+    //   console.log(`Loaded ${node.id}`);
+    // })
     .jstree(true);
   }
 

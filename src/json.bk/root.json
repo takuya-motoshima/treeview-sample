@@ -3,12 +3,14 @@
     "id": "child1",
     "parent": "root",
     "text": "Land",
+    "state": "closed",
     "children": true
   },
   {
     "id": "child2",
     "parent": "root",
     "text": "Sea",
+    "state": "closed",
     "children": true
   },
   {
