@@ -8,21 +8,36 @@ export default class {
     // console.log(JSON.stringify(this.opts, null, 2));
 
     // Tree instance.
-    globalThis.tree = this.tree = $(ctx).jstree({
+    this.tree = $(ctx).jstree({
       core: {
         // data configuration.
         data: {
+          type: 'GET',
           url : node => {
             const url = `src/json/${encodeURIComponent(node.id)}.json`;
             console.log(`Request ${url}`);
             return url;
           },
-          // data: node => {
-          //   console.log('#data node=', node)
-          //   // return { 'id' : node.id };
-          // },
-          dataType : 'json'
+          contentType: 'application/json; charset=utf-8',
+          success: data => {
+            console.log('Response: ', data);
+            // // for (let child of  data)
+            // //   child.children = true;
+            // console.log('Data after change: ', data);
+          }
         },
+        // data: {
+        //   url : node => {
+        //     const url = `src/json/${encodeURIComponent(node.id)}.json`;
+        //     console.log(`Request ${url}`);
+        //     return url;
+        //   },
+        //   data: (...args) => {
+        //     console.log('#data args=', args)
+        //     // return { 'id' : node.id };
+        //   },
+        //   dataType : 'json'
+        // },
 
         // determines what happens when a user tries to modify the structure of the tree.
         check_callback: true,
@@ -95,6 +110,8 @@ export default class {
     })
     // triggered when a node is closed and the animation is complete
     .on('after_close.jstree', (evnt, {node, instance}) => {
+      console.log(`Close node widh id ${node.id}`);
+
       // Delete the cache so that when the folder is opened, the child folder information is queried to the server again.
       this.tree.delete_node(node.children);
       this.tree._model.data[node.id].state.loaded = false;
@@ -104,6 +121,9 @@ export default class {
         const dom = this.getNode(node.id, true)[0];
         dom.classList.add('jstree-closed');
       }, 0);
+    })
+    .on('select_node.jstree', (evng, {node}) => {
+      console.log(`Select node with ID ${node.id}`);
     })
     // .on("close_node.jstree", (evnt, data) => {
     //   console.log("close_node");
@@ -138,7 +158,7 @@ export default class {
         }
       };
     for (let [key, defOpt] of Object.entries(defOpts)) {
-      console.log(`key=${key}, typeof opts[key]=${typeof opts[key]}, typeof defOpt=${typeof defOpt}`);
+      // console.log(`key=${key}, typeof opts[key]=${typeof opts[key]}, typeof defOpt=${typeof defOpt}`);
       if (!opts[key])
         opts[key] = defOpt;
       else if (typeof opts[key] === 'object' && typeof defOpt === 'object')
@@ -239,14 +259,20 @@ export default class {
       return void alert(this.opts.lang.valdn.folderExists);
 
     // Currently selected node.
-    const selNode = this.getNode(data.reference);
-    console.log('selNode=', selNode);
+    const parentNode = this.getNode(data.reference);
+    // console.log('parentNode=', parentNode);
 
     // Create a subfolder with the entered name in the selected folder.
-    this.tree.create_node(selNode, {text: newFldrName, type: 'unselFldr'}, 'last', newNode => {
+    const newNodeId = btoa(newFldrName);
+    this.tree.create_node(parentNode, {
+      id: newNodeId,
+      text: newFldrName,
+      type: 'unselFldr'
+    }, 'last', newNode => {
       // Select the newly created folder.
-      this.tree.deselect_node(selNode);
+      this.tree.deselect_node(parentNode);
       this.tree.select_node(newNode);
+      console.log(`Create a node with ID ${newNode.id}`);
     });
   }
 
@@ -323,13 +349,20 @@ export default class {
    * Change to default theme
    */
   changeDefaultTheme() {
-    tree.set_theme_variant(false);
+    this.tree.set_theme_variant(false);
   }
 
   /**
    * Change to large theme
    */
   changeLargeTheme() {
-    tree.set_theme_variant('large');
+    this.tree.set_theme_variant('large');
+  }
+
+  /**
+   * Returns an array of tree nodes converted to JSON.
+   */
+  getJson() {
+    return this.tree.get_json('#', {flat: true});
   }
 }

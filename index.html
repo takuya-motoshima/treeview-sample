@@ -26,6 +26,7 @@
     <button data-on-refresh-tree type="button">Refresh tree</button>
     <button data-on-use-large-theme type="button">Use large theme</button>
     <button data-on-use-default-theme type="button" disabled="disabled">Use default theme</button>
+    <button data-on-show-tree-json type="button">Show tree JSON</button>
   </p>
 
   <p>Right-click on a folder to display the context menu</p>
@@ -35,7 +36,8 @@
   </div>
 
   <script src="node_modules/jquery/dist/jquery.min.js"></script>
-  <script src="node_modules/jstree/dist/jstree.min.js"></script>
+  <script src="node_modules/jstree/dist/jstree.js"></script>
+  <!-- <script src="node_modules/jstree/dist/jstree.min.js"></script> -->
   <script type="module">
     import Tree from './src/js/Tree.js';
 
@@ -93,6 +95,9 @@
         tree.changeDefaultTheme();
         defThemeBtn.prop('disabled', true);
         lgeThemeBtn.prop('disabled', false);
+      })
+      .on('click', '[data-on-show-tree-json]', () => {
+        alert(JSON.stringify(tree.getJson()));
       });
   </script>
 </body>
