@@ -1,5 +1,12 @@
+:root {
+  --jstree-border-radius: .475rem;
+  --jstree-active-color: hsl(190deg, 96%, 22%);
+  --jstree-light-color: hsl(190deg, 96%, 97%);
+  
+}
+
 .jstree-node > .jstree-anchor {
-  color: hsl(190deg, 96%, 22%);
+  color: var(--jstree-active-color);
   font-size: 1.075rem !important;
 }
 
@@ -15,7 +22,7 @@
 }
 
 .jstree-node > .jstree-anchor.jstree-clicked {
-  background-color: hsl(190deg, 96%, 97%);
+  background-color: var(--jstree-light-color);
   font-weight: 600;
   border: 0;
   box-shadow: none;
@@ -81,20 +88,36 @@
 
 .vakata-context,
 .vakata-context ul {
-  border-radius: .475rem;
+  border-radius: var(--jstree-border-radius);
   background-color: #fff;
   box-shadow: 0 0 50px 0 rgb(82 63 105 / 15%);
   border:  0;
+  padding: 0;
 }
 
   .vakata-context li>a {
     color: #181C33;
     text-shadow: none;
+    font-weight: 600;;
+    /* border-radius: var(--jstree-border-radius); */
   }
 
-  .vakata-context li>a:hover {
-    color: hsl(190deg, 96%, 22%);
-    background-color: hsl(190deg, 96%, 97%);
+  .vakata-context li:first-child>a {
+    border-top-left-radius: var(--jstree-border-radius);
+    border-top-right-radius: var(--jstree-border-radius);
+  }
+
+  .vakata-context li:last-child>a {
+    border-bottom-left-radius: var(--jstree-border-radius);
+    border-bottom-right-radius: var(--jstree-border-radius);
+  }
+
+  .vakata-context li>a:hover,
+  .vakata-context .vakata-context-hover>a {
+    /* color: var(--jstree-active-color);
+    background-color: hsl(190deg, 96%, 97%); */
+    color: #fff;
+    background-color: var(--jstree-active-color);
     box-shadow: none;
   }
 
@@ -109,15 +132,32 @@
         background-size: 24px !important;
       }
 
-      .vakata-context li.jstree-contextmenu-create a i {
-        background-image: url("data:image/svg+xml,%3Csvg aria-hidden='true' focusable='false' data-prefix='fad' data-icon='plus' role='img' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 448 512'%3E%3Cstyle%3E .secondary %7B fill: rgb(173, 181, 189); opacity: 0.4; %7D .primary %7B fill: rgb(173, 181, 189); opacity: 1; %7D %3C/style%3E%3Cg%3E%3Cpath fill='currentColor' d='M176 448a32 32 0 0 0 32 32h32a32 32 0 0 0 32-32V304h-96zm64-416h-32a32 32 0 0 0-32 32v144h96V64a32 32 0 0 0-32-32z' class='secondary'%3E%3C/path%3E%3Cpath fill='currentColor' d='M448 240v32a32 32 0 0 1-32 32H32a32 32 0 0 1-32-32v-32a32 32 0 0 1 32-32h384a32 32 0 0 1 32 32z' class='primary'%3E%3C/path%3E%3C/g%3E%3C/svg%3E") !important;
+      .vakata-context li.jstree-contextmenu-create>a i {
+        background-image: url("data:image/svg+xml,%3Csvg aria-hidden='true' focusable='false' data-prefix='fad' data-icon='plus' role='img' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 448 512'%3E%3Cstyle%3E .secondary %7B fill: hsl(210deg, 11%, 16%); opacity: 0.4; %7D .primary %7B fill: hsl(210deg, 11%, 16%); opacity: 1; %7D %3C/style%3E%3Cg%3E%3Cpath fill='currentColor' d='M176 448a32 32 0 0 0 32 32h32a32 32 0 0 0 32-32V304h-96zm64-416h-32a32 32 0 0 0-32 32v144h96V64a32 32 0 0 0-32-32z' class='secondary'%3E%3C/path%3E%3Cpath fill='currentColor' d='M448 240v32a32 32 0 0 1-32 32H32a32 32 0 0 1-32-32v-32a32 32 0 0 1 32-32h384a32 32 0 0 1 32 32z' class='primary'%3E%3C/path%3E%3C/g%3E%3C/svg%3E") !important;
+        background-size: 20px !important;
       }
 
-      .vakata-context li.jstree-contextmenu-rename a i {
-        background-image: url("data:image/svg+xml,%3Csvg aria-hidden='true' focusable='false' data-prefix='fad' data-icon='edit' role='img' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 576 512'%3E%3Cstyle%3E .secondary %7B fill: rgb(173, 181, 189); opacity: 0.4; %7D .primary %7B fill: rgb(173, 181, 189); opacity: 1; %7D %3C/style%3E%3Cg%3E%3Cpath fill='currentColor' d='M564.6 60.2l-48.8-48.8a39.11 39.11 0 0 0-55.2 0l-35.4 35.4a9.78 9.78 0 0 0 0 13.8l90.2 90.2a9.78 9.78 0 0 0 13.8 0l35.4-35.4a39.11 39.11 0 0 0 0-55.2zM427.5 297.6l-40 40a12.3 12.3 0 0 0-3.5 8.5v101.8H64v-320h229.8a12.3 12.3 0 0 0 8.5-3.5l40-40a12 12 0 0 0-8.5-20.5H48a48 48 0 0 0-48 48v352a48 48 0 0 0 48 48h352a48 48 0 0 0 48-48V306.1a12 12 0 0 0-20.5-8.5z' class='secondary'%3E%3C/path%3E%3Cpath fill='currentColor' d='M492.8 173.3a9.78 9.78 0 0 1 0 13.8L274.4 405.5l-92.8 10.3a19.45 19.45 0 0 1-21.5-21.5l10.3-92.8L388.8 83.1a9.78 9.78 0 0 1 13.8 0z' class='primary'%3E%3C/path%3E%3C/g%3E%3C/svg%3E") !important;
+      .vakata-context li.jstree-contextmenu-create>a:hover i,
+      .vakata-context li.jstree-contextmenu-create.vakata-context-hover>a i {
+        background-image: url("data:image/svg+xml,%3Csvg aria-hidden='true' focusable='false' data-prefix='fad' data-icon='plus' role='img' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 448 512'%3E%3Cstyle%3E .secondary %7B fill: hsl(210deg, 11%, 90%); opacity: 0.4; %7D .primary %7B fill: hsl(210deg, 11%, 90%); opacity: 1; %7D %3C/style%3E%3Cg%3E%3Cpath fill='currentColor' d='M176 448a32 32 0 0 0 32 32h32a32 32 0 0 0 32-32V304h-96zm64-416h-32a32 32 0 0 0-32 32v144h96V64a32 32 0 0 0-32-32z' class='secondary'%3E%3C/path%3E%3Cpath fill='currentColor' d='M448 240v32a32 32 0 0 1-32 32H32a32 32 0 0 1-32-32v-32a32 32 0 0 1 32-32h384a32 32 0 0 1 32 32z' class='primary'%3E%3C/path%3E%3C/g%3E%3C/svg%3E") !important;
       }
 
-      .vakata-context li.jstree-contextmenu-remove a i {
-        background-image: url("data:image/svg+xml,%3Csvg aria-hidden='true' focusable='false' data-prefix='fad' data-icon='trash' role='img' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 448 512'%3E%3Cstyle%3E .secondary %7B fill: rgb(173, 181, 189); opacity: 0.4; %7D .primary %7B fill: rgb(173, 181, 189); opacity: 1; %7D %3C/style%3E%3Cg%3E%3Cpath fill='currentColor' d='M53.2 467L32 96h384l-21.2 371a48 48 0 0 1-47.9 45H101.1a48 48 0 0 1-47.9-45z' class='secondary'%3E%3C/path%3E%3Cpath fill='currentColor' d='M0 80V48a16 16 0 0 1 16-16h120l9.4-18.7A23.72 23.72 0 0 1 166.8 0h114.3a24 24 0 0 1 21.5 13.3L312 32h120a16 16 0 0 1 16 16v32a16 16 0 0 1-16 16H16A16 16 0 0 1 0 80z' class='primary'%3E%3C/path%3E%3C/g%3E%3C/svg%3E") !important;
+      .vakata-context li.jstree-contextmenu-rename>a i {
+        background-image: url("data:image/svg+xml,%3Csvg aria-hidden='true' focusable='false' data-prefix='fad' data-icon='edit' role='img' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 576 512'%3E%3Cstyle%3E .secondary %7B fill: hsl(210deg, 11%, 16%); opacity: 0.4; %7D .primary %7B fill: hsl(210deg, 11%, 16%); opacity: 1; %7D %3C/style%3E%3Cg%3E%3Cpath fill='currentColor' d='M564.6 60.2l-48.8-48.8a39.11 39.11 0 0 0-55.2 0l-35.4 35.4a9.78 9.78 0 0 0 0 13.8l90.2 90.2a9.78 9.78 0 0 0 13.8 0l35.4-35.4a39.11 39.11 0 0 0 0-55.2zM427.5 297.6l-40 40a12.3 12.3 0 0 0-3.5 8.5v101.8H64v-320h229.8a12.3 12.3 0 0 0 8.5-3.5l40-40a12 12 0 0 0-8.5-20.5H48a48 48 0 0 0-48 48v352a48 48 0 0 0 48 48h352a48 48 0 0 0 48-48V306.1a12 12 0 0 0-20.5-8.5z' class='secondary'%3E%3C/path%3E%3Cpath fill='currentColor' d='M492.8 173.3a9.78 9.78 0 0 1 0 13.8L274.4 405.5l-92.8 10.3a19.45 19.45 0 0 1-21.5-21.5l10.3-92.8L388.8 83.1a9.78 9.78 0 0 1 13.8 0z' class='primary'%3E%3C/path%3E%3C/g%3E%3C/svg%3E") !important;
+      }
+
+      .vakata-context li.jstree-contextmenu-rename>a:hover i,
+      .vakata-context li.jstree-contextmenu-rename.vakata-context-hover>a i {
+        background-image: url("data:image/svg+xml,%3Csvg aria-hidden='true' focusable='false' data-prefix='fad' data-icon='edit' role='img' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 576 512'%3E%3Cstyle%3E .secondary %7B fill: hsl(210deg, 11%, 90%); opacity: 0.4; %7D .primary %7B fill: hsl(210deg, 11%, 90%); opacity: 1; %7D %3C/style%3E%3Cg%3E%3Cpath fill='currentColor' d='M564.6 60.2l-48.8-48.8a39.11 39.11 0 0 0-55.2 0l-35.4 35.4a9.78 9.78 0 0 0 0 13.8l90.2 90.2a9.78 9.78 0 0 0 13.8 0l35.4-35.4a39.11 39.11 0 0 0 0-55.2zM427.5 297.6l-40 40a12.3 12.3 0 0 0-3.5 8.5v101.8H64v-320h229.8a12.3 12.3 0 0 0 8.5-3.5l40-40a12 12 0 0 0-8.5-20.5H48a48 48 0 0 0-48 48v352a48 48 0 0 0 48 48h352a48 48 0 0 0 48-48V306.1a12 12 0 0 0-20.5-8.5z' class='secondary'%3E%3C/path%3E%3Cpath fill='currentColor' d='M492.8 173.3a9.78 9.78 0 0 1 0 13.8L274.4 405.5l-92.8 10.3a19.45 19.45 0 0 1-21.5-21.5l10.3-92.8L388.8 83.1a9.78 9.78 0 0 1 13.8 0z' class='primary'%3E%3C/path%3E%3C/g%3E%3C/svg%3E") !important;
+      }
+
+      .vakata-context li.jstree-contextmenu-remove>a i {
+        background-image: url("data:image/svg+xml,%3Csvg aria-hidden='true' focusable='false' data-prefix='fad' data-icon='trash' role='img' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 448 512'%3E%3Cstyle%3E .secondary %7B fill: hsl(210deg, 11%, 16%); opacity: 0.4; %7D .primary %7B fill: hsl(210deg, 11%, 16%); opacity: 1; %7D %3C/style%3E%3Cg%3E%3Cpath fill='currentColor' d='M53.2 467L32 96h384l-21.2 371a48 48 0 0 1-47.9 45H101.1a48 48 0 0 1-47.9-45z' class='secondary'%3E%3C/path%3E%3Cpath fill='currentColor' d='M0 80V48a16 16 0 0 1 16-16h120l9.4-18.7A23.72 23.72 0 0 1 166.8 0h114.3a24 24 0 0 1 21.5 13.3L312 32h120a16 16 0 0 1 16 16v32a16 16 0 0 1-16 16H16A16 16 0 0 1 0 80z' class='primary'%3E%3C/path%3E%3C/g%3E%3C/svg%3E") !important;
+        background-size: 20px !important;
+      }
+
+      .vakata-context li.jstree-contextmenu-remove>a:hover i,
+      .vakata-context li.jstree-contextmenu-remove.vakata-context-hover>a i {
+        background-image: url("data:image/svg+xml,%3Csvg aria-hidden='true' focusable='false' data-prefix='fad' data-icon='trash' role='img' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 448 512'%3E%3Cstyle%3E .secondary %7B fill: hsl(210deg, 11%, 90%); opacity: 0.4; %7D .primary %7B fill: hsl(210deg, 11%, 90%); opacity: 1; %7D %3C/style%3E%3Cg%3E%3Cpath fill='currentColor' d='M53.2 467L32 96h384l-21.2 371a48 48 0 0 1-47.9 45H101.1a48 48 0 0 1-47.9-45z' class='secondary'%3E%3C/path%3E%3Cpath fill='currentColor' d='M0 80V48a16 16 0 0 1 16-16h120l9.4-18.7A23.72 23.72 0 0 1 166.8 0h114.3a24 24 0 0 1 21.5 13.3L312 32h120a16 16 0 0 1 16 16v32a16 16 0 0 1-16 16H16A16 16 0 0 1 0 80z' class='primary'%3E%3C/path%3E%3C/g%3E%3C/svg%3E") !important;
         background-size: 20px !important;
       }
