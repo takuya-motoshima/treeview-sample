@@ -1,6 +1,6 @@
 {
   "name": "treeview-sample",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "This is a sample code for JS tree view drawing and operation.",
   "main": "index.js",
   "files": [
