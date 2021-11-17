@@ -7,6 +7,11 @@
   <link rel="stylesheet" href="node_modules/jstree/dist/themes/default/style.min.css">
   <link rel="stylesheet" href="src/css/tree.css">
   <title>JS tree view</title>
+  <style>
+    button {
+      margin: 5px;
+    }
+  </style>
 </head>
 <body>
   <h1 style="display: flex; align-items: baseline; color: hsl(190deg, 96%, 22%)">
@@ -27,6 +32,7 @@
     <button data-on-use-large-theme type="button">Use large theme</button>
     <button data-on-use-default-theme type="button" disabled="disabled">Use default theme</button>
     <button data-on-show-tree-json type="button">Show tree JSON</button>
+    <button data-on-sel-root type="button">Select root folder</button>
   </p>
 
   <p>Right-click on a folder to display the context menu</p>
@@ -98,6 +104,9 @@
       })
       .on('click', '[data-on-show-tree-json]', () => {
         alert(JSON.stringify(tree.getJson()));
+      })
+      .on('click', '[data-on-sel-root]', () => {
+        tree.selectNode('root');
       });
   </script>
 </body>

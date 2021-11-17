@@ -8,7 +8,7 @@ export default class {
     // console.log(JSON.stringify(this.opts, null, 2));
 
     // Tree instance.
-    this.tree = $(ctx).jstree({
+    globalThis.tree = this.tree = $(ctx).jstree({
       core: {
         // data configuration.
         data: {
@@ -360,9 +360,22 @@ export default class {
   }
 
   /**
+   * Select a node.
+   * 
+   * @param {any} obj an array can be used to select multiple nodes.
+   * @param {boolean} supressEvent if set to true the changed.jstree event won't be triggered. 
+   * @param {boolean} preventOpen if set to true parents of the selected node won't be opened.
+   */
+  selectNode(obj, supressEvent = false, preventOpen = false) {
+    this.tree.select_node(obj, supressEvent, preventOpen);
+  }
+
+  /**
    * Returns an array of tree nodes converted to JSON.
    */
   getJson() {
-    return this.tree.get_json('#', {flat: true});
+    const json = this.tree.get_json('#', {flat: true});
+    console.log(JSON.stringify(json, null, 2));
+    return json;
   }
 }

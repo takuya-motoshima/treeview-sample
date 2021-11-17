@@ -25,6 +25,14 @@ You can try the tree view by accessing the installed directory from your browser
 
 All notable changes to this project will be documented in this file.
 
+### [1.0.8] - 2021-11-17
+#### Fixed
+- Added folder selection method to Tree module.
+  ```js
+  // Select root folder.
+  tree.selectNode('root');
+  ```
+
 ### [1.0.7] - 2021-11-16
 #### Fixed
 - Fixed context menu design to improve user interactivity.
