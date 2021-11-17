@@ -96,6 +96,8 @@
 }
 
   .vakata-context li>a {
+    display: flex;
+    align-items: center;
     color: #181C33;
     text-shadow: none;
     font-weight: 600;
@@ -126,10 +128,9 @@
   }
 
     .vakata-context li>a .vakata-contextmenu-sep {
-      display: none;
-      /* border: 0;
-      background: none;
-      height: auto; */
+      /* border: 0; */
+      /* background: none; */
+      height: auto;
     }
 
       .vakata-context li>a i {

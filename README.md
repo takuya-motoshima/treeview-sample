@@ -25,6 +25,10 @@ You can try the tree view by accessing the installed directory from your browser
 
 All notable changes to this project will be documented in this file.
 
+### [1.0.10] - 2021-11-17
+#### Fixed
+- Center the text in the context menu.
+
 ### [1.0.9] - 2021-11-17
 #### Fixed
 - Adjusted context menu size and margins.
