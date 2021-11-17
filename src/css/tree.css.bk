@@ -100,10 +100,6 @@
     text-shadow: none;
     font-weight: 600;
     /* border-radius: var(--jstree-border-radius); */
-    padding: .75rem 3rem .75rem 1rem;
-    /* padding: 0.65rem 1rem; */
-    min-width: 150px;
-    line-height: unset;
   }
 
   .vakata-context li:first-child>a {
@@ -126,19 +122,14 @@
   }
 
     .vakata-context li>a .vakata-contextmenu-sep {
-      display: none;
-      /* border: 0;
+      border: 0;
       background: none;
-      height: auto; */
     }
 
       .vakata-context li>a i {
         background-repeat: no-repeat !important;
         background-position: center !important;
         background-size: 24px !important;
-        margin: 0;
-        width: 24px;
-        height: 24px;
       }
 
       .vakata-context li.jstree-contextmenu-create>a i {

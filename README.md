@@ -25,6 +25,10 @@ You can try the tree view by accessing the installed directory from your browser
 
 All notable changes to this project will be documented in this file.
 
+### [1.0.9] - 2021-11-17
+#### Fixed
+- Adjusted context menu size and margins.
+
 ### [1.0.8] - 2021-11-17
 #### Fixed
 - Added folder selection method to Tree module.
