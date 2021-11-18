@@ -25,6 +25,32 @@ You can try the tree view by accessing the installed directory from your browser
 
 All notable changes to this project will be documented in this file.
 
+
+### [1.0.11] - 2021-11-18
+
+- The text of the folder name can now be wrapped, and the folder name tooltip can now be displayed by mouse over.
+  <table>
+    <thead>
+      <tr>
+        <th></th>
+        <th>New version</th>
+        <th>Previous version</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Display</td>
+        <td><img src="https://raw.githubusercontent.com/takuya-motoshima/treeview-sample/main/screencaps/After folder name wrap.png"></td>
+        <td><img src="https://raw.githubusercontent.com/takuya-motoshima/treeview-sample/main/screencaps/Before folder name wrap.png"></td>
+      </tr>
+      <tr>
+        <td>Folder DOM element</td>
+        <td><img src="https://raw.githubusercontent.com/takuya-motoshima/treeview-sample/main/screencaps/After folder name wrap DOM.png"></td>
+        <td><img src="https://raw.githubusercontent.com/takuya-motoshima/treeview-sample/main/screencaps/Before folder name wrap DOM.png"></td>
+      </tr>
+    </tbody>
+  </table>
+
 ### [1.0.10] - 2021-11-17
 #### Fixed
 - Center the text in the context menu.

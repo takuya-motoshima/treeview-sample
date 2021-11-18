@@ -7,6 +7,30 @@ export default class {
     this.opts = this.mergeConfig(opts);
     // console.log(JSON.stringify(this.opts, null, 2));
 
+    // Wrap the text of the added folder with a span element.
+    const obs = new MutationObserver(muts => {
+      for (const mut of muts) {
+        if (!mut.addedNodes.length)
+          continue;
+        for (let node of mut.addedNodes) {
+          if (!(node instanceof HTMLElement))
+            continue;         
+          const anchors = node.querySelectorAll('.jstree-anchor:not(.jstree-anchor-formatted)');
+          for (let anchor of anchors) {
+            // Wrap text with span.
+            let [_, icon, text] = anchor.innerHTML.match(/^(..*<\/i>)(..*)$/);
+
+            // Escape HTML entity for text.
+            text = text.replace(/[&'`"<>]/g, match => ({'&': '&amp;', "'": '&#x27;', '`': '&#x60;', '"': '&quot;', '<': '&lt;', '>': '&gt;',}[match]));
+            anchor.innerHTML = `${icon}<span class='jstree-anchor-text'>${text}</span>`;
+            anchor.title = text;
+            anchor.classList.add('jstree-anchor-formatted');
+          }
+        }
+      }
+    });
+    obs.observe(ctx, {attributes: false, childList: true, subtree: true});
+
     // Tree instance.
     globalThis.tree = this.tree = $(ctx).jstree({
       core: {
@@ -110,9 +134,8 @@ export default class {
     })
     // triggered when a node is closed and the animation is complete
     .on('after_close.jstree', (evnt, {node, instance}) => {
-      console.log(`Close node widh id ${node.id}`);
-
       // Delete the cache so that when the folder is opened, the child folder information is queried to the server again.
+      // console.log(`Close node widh id ${node.id}`);
       this.tree.delete_node(node.children);
       this.tree._model.data[node.id].state.loaded = false;
 
@@ -122,7 +145,7 @@ export default class {
         dom.classList.add('jstree-closed');
       }, 0);
     })
-    .on('select_node.jstree', (evng, {node}) => {
+    .on('select_node.jstree', (evnt, {node}) => {
       console.log(`Select node with ID ${node.id}`);
     })
     // .on("close_node.jstree", (evnt, data) => {
@@ -263,7 +286,9 @@ export default class {
     // console.log('parentNode=', parentNode);
 
     // Create a subfolder with the entered name in the selected folder.
-    const newNodeId = btoa(newFldrName);
+    const newNodeId = btoa(unescape(encodeURIComponent(newFldrName))); 
+    // const newNodeId = btoa(newFldrName);// "Uncaught DOMException" occurs when converting characters including double-byte characters.
+
     this.tree.create_node(parentNode, {
       id: newNodeId,
       text: newFldrName,
@@ -272,7 +297,7 @@ export default class {
       // Select the newly created folder.
       this.tree.deselect_node(parentNode);
       this.tree.select_node(newNode);
-      console.log(`Create a node with ID ${newNode.id}`);
+      // console.log(`Create a node with ID ${newNode.id}`);
     });
   }
 
@@ -285,7 +310,7 @@ export default class {
 
     // Selected folder name.
     const curFldrName = selNode.text.replace('\s+$', '');
-    console.log(`Current folder name: ${curFldrName}`);
+    // console.log(`Current folder name: ${curFldrName}`);
 
     // Show folder name input box.
     let newFldrName = window.prompt(this.opts.lang.prompt.rename, curFldrName);
