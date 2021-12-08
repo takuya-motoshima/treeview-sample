@@ -3,7 +3,7 @@
     "id": "root",
     "parent": "#",
     "text": "Creatures",
-    "state": "closed",
+    "//state": "closed",
     "children": true
   }
 ]

@@ -1,11 +1,33 @@
+import merge from './utils/merge.js';
+
 export default class {
   /**
    * Construct tree.
    */
   constructor(ctx, opts) {
     // Init options.
-    this.opts = this.mergeConfig(opts);
+    this.opts = merge({
+      maxDepth: 3,
+      lang: {
+        contextMenu: {
+          create: 'Create',
+          rename: 'Rename',
+          remove: 'Delete',
+        },
+        prompt: {
+          create: 'Please enter a new folder name',
+          rename: 'Please enter the folder name'
+        },
+        valdn: {
+          folderExists: 'This folder name is already in use',
+          folderNameRequired: 'Folder name is required'
+        }
+      }
+    }, opts);
     // console.log(JSON.stringify(this.opts, null, 2));
+
+    // Root folder ID.
+    this.rootFldrId = undefined;
 
     // Wrap the text of the added folder with a span element.
     const obs = new MutationObserver(muts => {
@@ -32,36 +54,35 @@ export default class {
     obs.observe(ctx, {attributes: false, childList: true, subtree: true});
 
     // Tree instance.
-    globalThis.tree = this.tree = $(ctx).jstree({
+    this.tree = $(ctx).jstree({
       core: {
         // data configuration.
         data: {
           type: 'GET',
           url : node => {
-            const url = `src/json/${encodeURIComponent(node.id)}.json`;
+            const url = `data/${encodeURIComponent(node.id)}.json`;
             console.log(`Request ${url}`);
             return url;
           },
           contentType: 'application/json; charset=utf-8',
           success: data => {
             console.log('Response: ', data);
-            // // for (let child of  data)
-            // //   child.children = true;
-            // console.log('Data after change: ', data);
+            if (!Array.isArray(data)) {
+              // Save the root folder ID.
+              if (data.parent === '#')
+                this.rootFldrId = data.id;
+            } else {
+            // Since jstree accepts only boolean type "children", if "children" is not boolean type, replace it with boolean type.
+              for (let row of data) {
+                // Save the root folder ID.
+                if (row.parent === '#')
+                  this.rootFldrId = row.id;
+                if ('children' in row && typeof row.children !== 'boolean')
+                  row.children = row.children == 1 ? true : false;
+              }
+            }
           }
         },
-        // data: {
-        //   url : node => {
-        //     const url = `src/json/${encodeURIComponent(node.id)}.json`;
-        //     console.log(`Request ${url}`);
-        //     return url;
-        //   },
-        //   data: (...args) => {
-        //     console.log('#data args=', args)
-        //     // return { 'id' : node.id };
-        //   },
-        //   dataType : 'json'
-        // },
 
         // determines what happens when a user tries to modify the structure of the tree.
         check_callback: true,
@@ -69,7 +90,7 @@ export default class {
         // a boolean indicating if multiple nodes can be selected
         multiple: false,
         themes: {
-          // variant: 'large',
+          variant: 'large',
           dots: false,
           stripes: false
         }
@@ -132,10 +153,18 @@ export default class {
         }
       }
     })
-    // triggered when a node is closed and the animation is complete
+    .on('state_ready.jstree', () => {
+      // After initializing the tree. If the node is not selected after initializing the tree, make the root folder selected.
+      const selNode = this.getSelectedNode();
+      console.log('selNode=', selNode);
+      if (!selNode)
+          this.selectNode(this.rootFldrId);
+    })
     .on('after_close.jstree', (evnt, {node, instance}) => {
-      // Delete the cache so that when the folder is opened, the child folder information is queried to the server again.
+      // triggered when a node is closed and the animation is complete
       // console.log(`Close node widh id ${node.id}`);
+      
+      // Delete the cache so that when the folder is opened, the child folder information is queried to the server again.
       this.tree.delete_node(node.children);
       this.tree._model.data[node.id].state.loaded = false;
 
@@ -146,6 +175,7 @@ export default class {
       }, 0);
     })
     .on('select_node.jstree', (evnt, {node}) => {
+      // triggered when an node is selected.
       console.log(`Select node with ID ${node.id}`);
     })
     // .on("close_node.jstree", (evnt, data) => {
@@ -155,39 +185,6 @@ export default class {
     //   console.log(`Loaded ${node.id}`);
     // })
     .jstree(true);
-  }
-
-  /**
-   * Merges default and custom options and returns.
-   */
-   mergeConfig(opts, defOpts = undefined) {
-    if (defOpts === undefined)
-      defOpts = {
-        maxDepth: 3,
-        lang: {
-          contextMenu: {
-            create: 'Create',
-            rename: 'Rename',
-            remove: 'Delete',
-          },
-          prompt: {
-            create: 'Please enter a new folder name',
-            rename: 'Please enter the folder name'
-          },
-          valdn: {
-            folderExists: 'This folder name is already in use',
-            folderNameRequired: 'Folder name is required'
-          }
-        }
-      };
-    for (let [key, defOpt] of Object.entries(defOpts)) {
-      // console.log(`key=${key}, typeof opts[key]=${typeof opts[key]}, typeof defOpt=${typeof defOpt}`);
-      if (!opts[key])
-        opts[key] = defOpt;
-      else if (typeof opts[key] === 'object' && typeof defOpt === 'object')
-        opts[key] = this.mergeConfig(opts[key], defOpt);
-    }
-    return opts;
   }
 
   /**
@@ -392,6 +389,7 @@ export default class {
    * @param {boolean} preventOpen if set to true parents of the selected node won't be opened.
    */
   selectNode(obj, supressEvent = false, preventOpen = false) {
+    // console.log('Select a folder, ', obj);
     this.tree.select_node(obj, supressEvent, preventOpen);
   }
 
@@ -399,8 +397,13 @@ export default class {
    * Returns an array of tree nodes converted to JSON.
    */
   getJson() {
-    const json = this.tree.get_json('#', {flat: true});
-    console.log(JSON.stringify(json, null, 2));
-    return json;
+  	return this.tree.get_json('#', {flat: true});
+  }
+
+  /**
+   * Returns the root node.
+   */
+  getRootNode() {
+    this.getNode(this.rootFldrId);
   }
 }

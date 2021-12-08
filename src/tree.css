@@ -3,7 +3,7 @@
   --jstree-active-color: hsl(190deg, 96%, 22%);
   --jstree-light-color: hsl(190deg, 96%, 97%);
   --jstree-context-width: 150px;;
-  --jstree-anchor-width: 300px;;
+  --jstree-anchor-width: 200px;;
 }
 
 .jstree-node > .jstree-anchor {
@@ -152,7 +152,7 @@
 
       .vakata-context li.jstree-contextmenu-create>a i {
         background-image: url("data:image/svg+xml,%3Csvg aria-hidden='true' focusable='false' data-prefix='fad' data-icon='plus' role='img' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 448 512'%3E%3Cstyle%3E .secondary %7B fill: hsl(210deg, 11%, 16%); opacity: 0.4; %7D .primary %7B fill: hsl(210deg, 11%, 16%); opacity: 1; %7D %3C/style%3E%3Cg%3E%3Cpath fill='currentColor' d='M176 448a32 32 0 0 0 32 32h32a32 32 0 0 0 32-32V304h-96zm64-416h-32a32 32 0 0 0-32 32v144h96V64a32 32 0 0 0-32-32z' class='secondary'%3E%3C/path%3E%3Cpath fill='currentColor' d='M448 240v32a32 32 0 0 1-32 32H32a32 32 0 0 1-32-32v-32a32 32 0 0 1 32-32h384a32 32 0 0 1 32 32z' class='primary'%3E%3C/path%3E%3C/g%3E%3C/svg%3E") !important;
-        background-size: 20px !important;
+        background-size: 16px !important;
       }
 
       .vakata-context li.jstree-contextmenu-create>a:hover i,

@@ -22,12 +22,14 @@ npm install;
 You can try the tree view by accessing the installed directory from your browser.
 
 ## Changelog
-
 All notable changes to this project will be documented in this file.
 
+### [1.0.12] - 2021-12-08
+#### Fixed
+- Fixed to make the root folder selected if the node is not selected after initializing the tree.
 
 ### [1.0.11] - 2021-11-18
-
+#### Fixed
 - The text of the folder name can now be wrapped, and the folder name tooltip can now be displayed by mouse over.
   <table>
     <thead>
