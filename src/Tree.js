@@ -161,7 +161,7 @@ export default class {
           this.selectNode(this.rootFldrId);
     })
     .on('after_close.jstree', (evnt, {node, instance}) => {
-      // triggered when a node is closed and the animation is complete
+      // triggered when a node is closed and the animation is complete.
       // console.log(`Close node widh id ${node.id}`);
       
       // Delete the cache so that when the folder is opened, the child folder information is queried to the server again.
@@ -350,9 +350,9 @@ export default class {
   /**
    * get the JSON representation of a node (or the actual jQuery extended DOM node) by using any input (child DOM element, ID string, selector, etc)
    * 
-   * @param {mixed} obj 
-   * @param {boolean} asDom 
-   * @return {object|jQuery}
+   * @param   {mixed}         obj 
+   * @param   {boolean}       asDom 
+   * @return  {object|jQuery}
    */
   getNode(obj, asDom = false) {
     return this.tree.get_node(obj, asDom);
@@ -405,5 +405,23 @@ export default class {
    */
   getRootNode() {
     this.getNode(this.rootFldrId);
+  }
+
+  /**
+   * Returns the full folder path.
+   * 
+   * @example
+   * const tree = new Tree(document.querySelector('#tree));
+   *
+   * // Get the full path of the selected folder.
+   * // Output example: /Root folder/Subfolder 1
+   * const fldrPath = tree.getFldrFullpath(tree.getSelectedNode());
+   * console.log(fldrPath);
+   *
+   * @param   {mixed}   obj node
+   * @return  {string}      Full path of the folder.
+   */
+  getFldrFullpath(obj) {
+    return this.tree.get_path(obj, '/');
   }
 }

@@ -24,6 +24,19 @@ You can try the tree view by accessing the installed directory from your browser
 ## Changelog
 All notable changes to this project will be documented in this file.
 
+### [1.0.13] - 2021-12-20
+#### Fixed
+- Added a method to return the full path of a folder.
+
+    ```js
+    const tree = new Tree(document.querySelector('#tree));
+
+    // Get the full path of the selected folder.
+    // Output example: /Root folder/Subfolder 1
+    const fldrPath = tree.getFldrFullpath(tree.getSelectedNode());
+    console.log(fldrPath);
+    ```
+
 ### [1.0.12] - 2021-12-08
 #### Fixed
 - Fixed to make the root folder selected if the node is not selected after initializing the tree.
