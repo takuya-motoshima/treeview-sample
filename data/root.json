@@ -2,20 +2,20 @@
   {
     "id": "child1",
     "parent": "root",
-    "text": "Land",
+    "text": "Item1",
     "//state": "closed",
     "children": true
   },
   {
     "id": "child2",
     "parent": "root",
-    "text": "Sea",
+    "text": "Item2",
     "//state": "closed",
     "children": true
   },
   {
     "id": "child3",
     "parent": "root",
-    "text": "Sky"
+    "text": "Item3"
   }
 ]

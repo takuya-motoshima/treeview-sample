@@ -2,7 +2,7 @@
   {
     "id": "root",
     "parent": "#",
-    "text": "Creatures",
+    "text": "Root",
     "//state": "closed",
     "children": true
   }

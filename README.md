@@ -33,8 +33,8 @@ All notable changes to this project will be documented in this file.
 
     // Get the full path of the selected folder.
     // Output example: /Root folder/Subfolder 1
-    const fldrPath = tree.getFldrFullpath(tree.getSelectedNode());
-    console.log(fldrPath);
+    const folderPath = tree.getFolderPath(tree.getSelectedNode());
+    console.log(folderPath);
     ```
 
 ### [1.0.12] - 2021-12-08

@@ -179,3 +179,43 @@
         background-image: url("data:image/svg+xml,%3Csvg aria-hidden='true' focusable='false' data-prefix='fad' data-icon='trash' role='img' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 448 512'%3E%3Cstyle%3E .secondary %7B fill: hsl(210deg, 11%, 90%); opacity: 0.4; %7D .primary %7B fill: hsl(210deg, 11%, 90%); opacity: 1; %7D %3C/style%3E%3Cg%3E%3Cpath fill='currentColor' d='M53.2 467L32 96h384l-21.2 371a48 48 0 0 1-47.9 45H101.1a48 48 0 0 1-47.9-45z' class='secondary'%3E%3C/path%3E%3Cpath fill='currentColor' d='M0 80V48a16 16 0 0 1 16-16h120l9.4-18.7A23.72 23.72 0 0 1 166.8 0h114.3a24 24 0 0 1 21.5 13.3L312 32h120a16 16 0 0 1 16 16v32a16 16 0 0 1-16 16H16A16 16 0 0 1 0 80z' class='primary'%3E%3C/path%3E%3C/g%3E%3C/svg%3E") !important;
         background-size: 20px !important;
       }
+
+/* Icon Button */
+.jstree-anchor-actions {
+  display: flex;
+}
+
+  .jstree-anchor-actions .btn-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: .5rem;
+    padding: 0;
+    /* height: calc(1.5em + 1.1rem + 2px); */
+    /* width: calc(1.5em + 1.1rem + 2px); */
+    line-height: 1.5;
+    color: #181C32;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    user-select: none;
+    border: 0;
+    border-radius: 0.475rem;
+    background-color: transparent;
+    box-shadow: none;
+    transition: color 0.15s ease-in-out,
+      background-color 0.15s ease-in-out,
+      border-color 0.15s ease-in-out,
+      box-shadow 0.15s ease-in-out;
+  }
+
+    .jstree-anchor-actions .btn-icon .svg-icon {
+      padding: 0;
+      margin: 0;
+      line-height: 1;
+    }
+
+      .jstree-anchor-actions .btn-icon .svg-icon svg {
+        height: 1rem;
+        width: 1rem;
+      }

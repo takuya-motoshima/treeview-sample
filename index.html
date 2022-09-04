@@ -6,88 +6,75 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="node_modules/jstree/dist/themes/default/style.min.css">
   <link rel="stylesheet" href="src/tree.css">
-  <title>JS tree view</title>
+  <title>jstree sample</title>
   <style>
-    button {
-      margin: 5px;
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
     }
+
+      .actions button {
+        margin-top: .5rem;
+        margin-right: .5rem;
+        cursor: pointer;
+      }
   </style>
 </head>
 <body>
-  <h1 style="display: flex; align-items: baseline; color: hsl(190deg, 96%, 22%)">
-    <img width="26" height="26" style="margin-right: .3rem;" src="logo.svg">
-    JS tree view
-  </h1>
-
-  <p>
-    <img style="max-width:100%; max-height:36px;" src="browser.png">
-    <br>
-    <small>Chrome 14+, Firefox 3.5+, Opera 12+, Safari 4+, IE8+</small>
-  </p>
-
-  <p>
-    <button data-on-update-tree-with-json type="button">Update tree with JSON</button>
-    <button data-on-update-tree-with-ajax type="button">Update tree with Ajax</button>
-    <button data-on-refresh-tree type="button">Refresh tree</button>
-    <button data-on-use-large-theme type="button" disabled="disabled">Use large theme</button>
-    <button data-on-use-default-theme type="button">Use default theme</button>
-    <button data-on-show-tree-json type="button">Show tree JSON</button>
-    <button data-on-sel-root type="button">Select root folder</button>
-  </p>
-
-  <p>Right-click on a folder to display the context menu</p>
-
-  <div style="background-color: #ffffee; border: 1px solid gray;">
-    <div id="tree"></div>
+  <div style="margin-bottom: 1rem; margin-top: 1rem;">Right-click on a folder to h context menu.</div>
+  <div id="tree"></div>
+  <div class="actions">
+    <button data-from-json type="button">From JSON</button>
+    <button data-from-ajax type="button">From AJAX</button>
+    <button data-refresh type="button">Refreshment</button>
+    <button data-large-theme type="button" disabled="disabled">Large text theme</button>
+    <button data-default-theme type="button">Default theme</button>
+    <button data-show-json type="button">Show the tree in JSON</button>
+    <button data-activate-root type="button">Activate root folder</button>
   </div>
 
   <script src="node_modules/jquery/dist/jquery.min.js"></script>
   <script src="node_modules/jstree/dist/jstree.js"></script>
   <script type="module">
     import Tree from './src/Tree.js';
-
-    // Tree instance.
     const tree = new Tree(document.querySelector('#tree'), {maxDepth: 3});
-
-    // Set events.
-    const lgeThemeBtn = $('[data-on-use-large-theme]');
-    const defThemeBtn = $('[data-on-use-default-theme]');
-
+    const largeThemeButton = $('[data-large-theme]');
+    const defaultThemeButton = $('[data-default-theme]');
     $('body')
-      .on('click', '[data-on-update-tree-with-json]', () => {
+      .on('click', '[data-from-json]', () => {
         tree.updateTree([
-          {id: 'root', parent: '#', text: 'Menu'},
-          {id: 'child1', parent: 'root', text: 'Main dish'},
-          {id: 'child2', parent: 'root', text: 'Drink'},
-          {id: 'grandchild1', parent: 'child1', text: 'Beef steak'},
-          {id: 'grandchild2', parent: 'child1', text: 'Sea bream meuniere'},
-          {id: 'grandchild3', parent: 'child1', text: 'Teriyaki bird'},
-          {id: 'grandchild4', parent: 'child2', text: 'Orange juice'},
-          {id: 'grandchild5', parent: 'child2', text: 'Cola'},
-          {id: 'grandchild6', parent: 'child2', text: 'Beer'},
-          {id: 'grandchild7', parent: 'child2', text: 'Wine'}
+          {id: 'root', parent: '#', text: 'Root'},
+          {id: 'child1', parent: 'root', text: 'Item1'},
+          {id: 'child2', parent: 'root', text: 'Item2'},
+          {id: 'grandchild1', parent: 'child1', text: 'Item11'},
+          {id: 'grandchild2', parent: 'child1', text: 'Item12'},
+          {id: 'grandchild3', parent: 'child1', text: 'Item13'},
+          {id: 'grandchild4', parent: 'child2', text: 'Item21'},
+          {id: 'grandchild5', parent: 'child2', text: 'Item22'},
+          {id: 'grandchild6', parent: 'child2', text: 'Item23'},
+          {id: 'grandchild7', parent: 'child2', text: 'Item24'}
         ]);
       })
-      .on('click', '[data-on-update-tree-with-ajax]', () => {
-        tree.updateTree('data/data1.json');
+      .on('click', '[data-from-ajax]', () => {
+        tree.updateTree('data/data.json');
       })
-      .on('click', '[data-on-refresh-tree]', () => {
+      .on('click', '[data-refresh]', () => {
         tree.refreshTree();
       })
       .on('click', '[data-on-use-large-theme]', () => {
         tree.changeLargeTheme();
-        lgeThemeBtn.prop('disabled', true);
-        defThemeBtn.prop('disabled', false);
+        largeThemeButton.prop('disabled', true);
+        defaultThemeButton.prop('disabled', false);
       })
       .on('click', '[data-on-use-default-theme]', () => {
         tree.changeDefaultTheme();
-        defThemeBtn.prop('disabled', true);
-        lgeThemeBtn.prop('disabled', false);
+        defaultThemeButton.prop('disabled', true);
+        largeThemeButton.prop('disabled', false);
       })
-      .on('click', '[data-on-show-tree-json]', () => {
+      .on('click', '[data-show-json]', () => {
         alert(JSON.stringify(tree.getJson()));
       })
-      .on('click', '[data-on-sel-root]', () => {
+      .on('click', '[data-activate-root]', () => {
         tree.selectNode('root');
       });
   </script>
